@@ -84,6 +84,42 @@ public function store(Request $request)
 
 
 
+Livewire Usage
+
+```
+public function submit()
+{
+	$this->alert('success', 'Submission successful!');
+}
+
+// Success event
+$this->alert('success', 'Submission successful!');
+
+// Information event
+$this->alert('info', 'Hello, Awesome Developer!');
+
+// Warning event
+$this->alert('warning', 'You have been warned!');
+
+// Error event
+$this->alert('error', 'Whoops! you did it again!');
+
+
+// Success event
+$this->alert('success', 'You are successful!', [
+	'position'  =>  'center',
+	'timer'  =>  15000,
+	'toast'  =>  false,
+	'text'  =>  'I am a subtext',
+	'showCancelButton'  =>  false,
+	'showConfirmButton'  =>  false
+]);
+
+```
+
+
+
+
 
 
 SweetAlert2 is open-sourced software licensed under the MIT License (MIT). Please see [License File](LICENSE.md) for more information.

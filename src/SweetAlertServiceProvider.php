@@ -2,10 +2,15 @@
 
 namespace DRO\SweetAlert;
 
+use Livewire\Component;
 use Illuminate\Support\ServiceProvider;
+
 
 class SweetAlertServiceProvider extends ServiceProvider
 {
+
+    protected $name = 'alert';
+
     /**
      * Bootstrap the package services.
      *
@@ -19,6 +24,14 @@ class SweetAlertServiceProvider extends ServiceProvider
          */
         $this->registerHelpers();
 
+        Component::macro($this->name, function ($type = 'success', $message = '', $options = []) {
+            return $this->dispatchBrowserEvent('alert', [
+                'type' => $type,
+                'message' => $message,
+                'options' => $options
+            ]);
+        });
+
         /*
         * Registering the Package Views
         */
@@ -28,6 +41,8 @@ class SweetAlertServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->registerPublishing();
         }
+
+
     }
 
     /**
@@ -98,6 +113,10 @@ class SweetAlertServiceProvider extends ServiceProvider
         $this->app->singleton('alert', function ($app) {
             return $this->app->make(Toaster::class);
         });
+
+
+
+
 
         if ($this->app->runningInConsole()) {
             // Registering package commands.
